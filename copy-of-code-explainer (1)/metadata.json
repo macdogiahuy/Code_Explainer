@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Code Explainer",
+  "description": "An AI-powered tool to explain code snippets in various programming languages. Paste your code, choose a language, and get a detailed breakdown, overall explanation, and line-by-line analysis.",
+  "requestFramePermissions": []
+}
