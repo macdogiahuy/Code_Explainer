@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+      'Segoe UI', sans-serif;
+  }
+
+  body {
+    @apply m-0 min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 text-slate-900 antialiased transition-colors duration-300;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  .dark body {
+    @apply bg-gradient-to-br from-midnight-950 via-midnight-900 to-midnight-800 text-slate-100;
+  }
+}
