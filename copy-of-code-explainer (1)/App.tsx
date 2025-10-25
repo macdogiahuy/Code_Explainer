@@ -5,6 +5,7 @@ import { BrainCircuitIcon, SearchIcon, CheckCircleIcon, SparklesIcon } from './c
 import CodeInput from './components/CodeInput';
 import LanguageSelector from './components/LanguageSelector';
 import ResultsView from './components/ResultsView';
+import SettingsModal from './components/SettingsModal';
 
 const DEFAULT_CODE = `def factorial(n):
     """
@@ -72,6 +73,7 @@ const App: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [showNotification, setShowNotification] = useState<boolean>(false);
     const [submittedQuery, setSubmittedQuery] = useState<SubmittedQuery | null>(null);
+    const [showSettings, setShowSettings] = useState<boolean>(false);
 
 
     const handleExplainCode = useCallback(async () => {
@@ -198,6 +200,21 @@ const App: React.FC = () => {
                             </button>
                         </footer>
                     </>
+                )}
+                
+                {/* Settings Button */}
+                <div className="fixed bottom-8 right-8 z-50">
+                    <button
+                        onClick={() => setShowSettings(true)}
+                        className="flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:brightness-110"
+                    >
+                        ⚙️ Settings
+                    </button>
+                </div>
+
+                {/* Settings Modal */}
+                {showSettings && (
+                    <SettingsModal onClose={() => setShowSettings(false)} />
                 )}
             </main>
         </div>

@@ -6,6 +6,7 @@ import 'prismjs/components/prism-tsx';
 import { useEffect, useMemo, useState } from 'react';
 import Editor from 'react-simple-code-editor';
 import './styles/prism-theme.css';
+import SettingsModal from './components/SettingsModal/SettingsModal';
 
 const languages = [
   { value: 'python', label: 'Python', prism: 'python' },
@@ -121,6 +122,7 @@ function App() {
   const [language, setLanguage] = useState(languages[0].value);
   const [codeMap, setCodeMap] = useState(initialSnippets);
   const [authTab, setAuthTab] = useState('login');
+  const [showSettings, setShowSettings] = useState(false);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -365,11 +367,10 @@ function App() {
                   key={option.value}
                   type="button"
                   onClick={() => handleLanguageChange(option.value)}
-                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
-                    option.value === language
-                      ? 'border-transparent bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 text-white shadow-glow'
-                      : 'border-slate-200/80 bg-white/50 text-slate-600 hover:border-sky-400 hover:text-sky-500 dark:border-slate-700/70 dark:bg-midnight-900/60 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:text-sky-300'
-                  }`}
+                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${option.value === language
+                    ? 'border-transparent bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 text-white shadow-glow'
+                    : 'border-slate-200/80 bg-white/50 text-slate-600 hover:border-sky-400 hover:text-sky-500 dark:border-slate-700/70 dark:bg-midnight-900/60 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:text-sky-300'
+                    }`}
                 >
                   {option.label}
                 </button>
@@ -532,22 +533,20 @@ function App() {
               <button
                 type="button"
                 onClick={() => setAuthTab('login')}
-                className={`rounded-full px-4 py-2 transition ${
-                  authTab === 'login'
-                    ? 'bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 text-white shadow-glow'
-                    : 'hover:text-sky-500 dark:hover:text-sky-300'
-                }`}
+                className={`rounded-full px-4 py-2 transition ${authTab === 'login'
+                  ? 'bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 text-white shadow-glow'
+                  : 'hover:text-sky-500 dark:hover:text-sky-300'
+                  }`}
               >
                 Đăng nhập
               </button>
               <button
                 type="button"
                 onClick={() => setAuthTab('register')}
-                className={`rounded-full px-4 py-2 transition ${
-                  authTab === 'register'
-                    ? 'bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 text-white shadow-glow'
-                    : 'hover:text-sky-500 dark:hover:text-sky-300'
-                }`}
+                className={`rounded-full px-4 py-2 transition ${authTab === 'register'
+                  ? 'bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 text-white shadow-glow'
+                  : 'hover:text-sky-500 dark:hover:text-sky-300'
+                  }`}
               >
                 Đăng ký
               </button>
@@ -654,6 +653,21 @@ function App() {
             </div>
           </form>
         </section>
+
+        {/* Nút mở modal Settings */}
+        <div className="fixed bottom-8 right-8 z-50">
+          <button
+            onClick={() => setShowSettings(true)}
+            className="flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-400 via-indigo-500 to-purple-500 px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:brightness-110"
+          >
+            ⚙️ Settings
+          </button>
+        </div>
+
+        {/* Hiển thị modal nếu bật */}
+        {showSettings && (
+          <SettingsModal onClose={() => setShowSettings(false)} />
+        )}
 
         <footer className="mt-20 flex flex-col items-center gap-4 pb-10 text-xs text-slate-500 sm:flex-row sm:justify-between dark:text-slate-400">
           <p>
