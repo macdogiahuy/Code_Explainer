@@ -41,10 +41,10 @@ const CodeInput: React.FC<CodeInputProps> = ({ code, onCodeChange = () => {}, hi
 
 
   return (
-    <div className="flex font-mono text-sm bg-slate-800/60 border border-slate-700 rounded-xl overflow-hidden h-full min-h-[24rem]">
+    <div className="flex font-mono text-sm bg-slate-800/60 border border-slate-700 rounded-xl overflow-hidden h-full">
       <div
         ref={lineCounterRef}
-        className="line-numbers flex flex-col items-end p-4 text-slate-500 bg-slate-900/50 select-none overflow-y-hidden"
+        className="line-numbers flex flex-col items-end p-4 text-slate-500 bg-slate-900/50 select-none overflow-y-hidden min-w-[3.5rem]"
       >
         {Array.from({ length: lineCount }, (_, i) => {
             const lineNumber = i + 1;
@@ -67,7 +67,7 @@ const CodeInput: React.FC<CodeInputProps> = ({ code, onCodeChange = () => {}, hi
         onChange={(e) => onCodeChange(e.target.value)}
         onScroll={handleScroll}
         onKeyDown={handleKeyDown}
-        className="flex-grow p-4 bg-transparent text-slate-200 resize-none focus:outline-none leading-normal"
+        className="flex-grow p-4 bg-transparent text-slate-200 resize-none focus:outline-none leading-relaxed text-sm"
         spellCheck="false"
         wrap="off"
         readOnly={readOnly}

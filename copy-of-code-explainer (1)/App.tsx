@@ -110,13 +110,13 @@ const App: React.FC = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#100320] via-[#150529] to-[#1a0732] p-4 sm:p-6 lg:p-8 flex items-center justify-center font-sans">
+        <div className="min-h-screen bg-gradient-to-br from-[#100320] via-[#150529] to-[#1a0732] p-4 font-sans">
             <Notification
                 show={showNotification}
                 message="Explanation generated successfully!"
                 onClose={() => setShowNotification(false)}
             />
-            <main className="w-full max-w-7xl mx-auto bg-slate-900/50 backdrop-blur-xl border border-cyan-400/20 rounded-3xl shadow-2xl shadow-cyan-500/10 p-6 sm:p-8">
+            <main className="w-full max-w-7xl mx-auto bg-slate-900/50 backdrop-blur-xl border border-cyan-400/20 rounded-2xl shadow-2xl shadow-cyan-500/10 p-6 min-h-[90vh]">
                 
                 {explanations && submittedQuery && !isLoading ? (
                     <ResultsView 
@@ -142,7 +142,7 @@ const App: React.FC = () => {
                             {/* Left Panel */}
                             <div className="flex flex-col gap-6">
                                 <div>
-                                    <label htmlFor="prompt-input" className="flex items-center gap-2 mb-2 text-sm font-medium text-slate-300">
+                                    <label htmlFor="prompt-input" className="flex items-center gap-2 mb-3 text-sm font-medium text-slate-300">
                                         <SparklesIcon className="w-5 h-5 text-cyan-400" />
                                         What do you want to do with this code?
                                     </label>
@@ -152,19 +152,21 @@ const App: React.FC = () => {
                                         value={prompt}
                                         onChange={(e) => setPrompt(e.target.value)}
                                         placeholder="e.g., Find potential bugs, suggest improvements..."
-                                        className="w-full px-4 py-3 bg-slate-800/60 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-colors"
+                                        className="w-full px-4 py-3 text-sm bg-slate-800/60 border border-slate-700 rounded-lg text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-colors"
                                     />
                                 </div>
                                 <LanguageSelector selectedLanguage={language} onSelectLanguage={setLanguage} />
-                                <CodeInput
-                                    code={code}
-                                    onCodeChange={setCode}
-                                    highlightedLine={null}
-                                />
+                                <div className="h-[400px]">
+                                    <CodeInput
+                                        code={code}
+                                        onCodeChange={setCode}
+                                        highlightedLine={null}
+                                    />
+                                </div>
                             </div>
 
                             {/* Right Panel */}
-                            <div className="flex flex-col gap-5">
+                            <div className="flex flex-col gap-5 h-[400px]">
                                 {isLoading ? (
                                     <div className="flex items-center justify-center h-full">
                                         <div className="relative">
@@ -174,12 +176,12 @@ const App: React.FC = () => {
                                         </div>
                                     </div>
                                 ) : error ? (
-                                    <div className="bg-red-900/50 border border-red-500 text-red-300 p-4 rounded-lg">
+                                    <div className="bg-red-900/50 border border-red-500 text-red-300 p-4 rounded-lg text-sm">
                                         {error}
                                     </div>
                                 ) : (
                                     <div className="flex flex-col items-center justify-center h-full text-center p-8 bg-slate-800/40 rounded-xl border border-slate-700">
-                                        <p className="text-slate-400">Your code explanations will appear here.</p>
+                                        <p className="text-slate-400 text-base">Your code explanations will appear here.</p>
                                         <p className="text-sm text-slate-500 mt-2">Enter a prompt and your code, then click "Generate" to get started.</p>
                                     </div>
                                 )}
